@@ -14,7 +14,7 @@ function getComputerChoice(){
             return 'Scissors';
     }
 }
-console.log (getComputerChoice)
+
 function playRound (playerSelection, computerSelection) {
     if (playerSelection != 'Rock' && playerSelection != 'Scissors' && playerSelection != 'Paper') {
         return 'Error: please select Rock,Paper,or Scissors';
@@ -23,18 +23,18 @@ function playRound (playerSelection, computerSelection) {
         return 'its a tie'     
     }
     if (
-        (playerSelection === 'Rock' && computerSelection === 'Scissor') || 
+        (playerSelection === 'Rock' && computerSelection === 'Scissors') || 
         (playerSelection === 'Paper' && computerSelection === 'Rock') ||
-        (playerSelection === 'Scissor' && computerSelection=== 'Paper')
+        (playerSelection === 'Scissors' && computerSelection === 'Paper')
          ) {
              playerScore++
              roundWinner = 'player'
              return 'You Win !'
          }
     if (
-            (computerSelection === 'Rock' && playerSelection === 'Scissor') || 
+            (computerSelection === 'Rock' && playerSelection === 'Scissors') || 
             (computerSelection === 'Paper' && playerSelection === 'Rock') ||
-            (computerSelection === 'Scissor' && playerSelection=== 'Paper')
+            (computerSelection === 'Scissors' && playerSelection === 'Paper')
              ) {
                  computerScore++
                  roundWinner = 'computer'
@@ -44,7 +44,7 @@ function playRound (playerSelection, computerSelection) {
 function playGame(){
     let playerSelection = prompt("Pick your Tool (Paper, Rock, Scissors)");
     let computerSelection = getComputerChoice();
-    console.log(playerSelection);
+    console.log(playerSelection, computerSelection);
     console.log(playRound(playerSelection, computerSelection));
 }
 
