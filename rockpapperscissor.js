@@ -1,0 +1,53 @@
+let playerScore = 0
+let computerScore = 0
+let roundWinner = ''
+
+
+function getComputerChoice(){
+    let randomNumber = Math.floor(Math.random() * 3);
+    switch(randomNumber){
+        case 0:
+            return 'Rock';
+        case 1:
+            return 'Paper';
+        case 2:
+            return 'Scissors';
+    }
+}
+console.log (getComputerChoice)
+function playRound (playerSelection, computerSelection) {
+    if (playerSelection != 'Rock' && playerSelection != 'Scissors' && playerSelection != 'Paper') {
+        return 'Error: please select Rock,Paper,or Scissors';
+    }
+    if (playerSelection == computerSelection) {
+        return 'its a tie'     
+    }
+    if (
+        (playerSelection === 'Rock' && computerSelection === 'Scissor') || 
+        (playerSelection === 'Paper' && computerSelection === 'Rock') ||
+        (playerSelection === 'Scissor' && computerSelection=== 'Paper')
+         ) {
+             playerScore++
+             roundWinner = 'player'
+             return 'You Win !'
+         }
+    if (
+            (computerSelection === 'Rock' && playerSelection === 'Scissor') || 
+            (computerSelection === 'Paper' && playerSelection === 'Rock') ||
+            (computerSelection === 'Scissor' && playerSelection=== 'Paper')
+             ) {
+                 computerScore++
+                 roundWinner = 'computer'
+                return 'big oof you lose'
+             }
+}
+function playGame(){
+    let playerSelection = prompt("Pick your Tool (Paper, Rock, Scissors)");
+    let computerSelection = getComputerChoice();
+    console.log(playerSelection);
+    console.log(playRound(playerSelection, computerSelection));
+}
+
+for (let i = 0; i < 5; i++) {
+    playGame();
+}
