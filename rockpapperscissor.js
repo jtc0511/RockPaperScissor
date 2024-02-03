@@ -16,6 +16,10 @@ function getComputerChoice(){
 }
 
 function playRound (playerSelection, computerSelection) {
+
+    playerSelection = playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1);
+
+
     if (playerSelection != 'Rock' && playerSelection != 'Scissors' && playerSelection != 'Paper') {
         return 'Error: please select Rock,Paper,or Scissors';
     }
@@ -42,7 +46,7 @@ function playRound (playerSelection, computerSelection) {
              }
 }
 function playGame(){
-    let playerSelection = prompt("Pick your Tool (Paper, Rock, Scissors)");
+    let playerSelection = prompt("Pick your Tool (Rock,Paper,Scissors)");
     let computerSelection = getComputerChoice();
     console.log(playerSelection, computerSelection);
     console.log(playRound(playerSelection, computerSelection));
