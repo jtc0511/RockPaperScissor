@@ -1,70 +1,73 @@
-let playerScore = 0
-let computerScore = 0
-let roundWinner = ''
+const choices = ["rock", "paper", "scissors"];
+const playerDisplay = document.getElementById("playerDisplay");
+const computerDisplay = document.getElementById("computerDisplay");
+const resultDisplay = document.getElementById("resultsDisplay");
+let playerScore = 0;
+let computerScore = 0;
+let roundsPlayed = 0;
+const totalRounds = 5;
 
-//randomly gets computer choice//
-function getComputerChoice(){
-    let randomNumber = Math.floor(Math.random() * 3);
-    switch(randomNumber){
-        case 0:
-            return 'Rock';
-        case 1:
-            return 'Paper';
-        case 2:
-            return 'Scissors';
+function playGame(playerChoice) {
+  const computerChoice = choices[Math.floor(Math.random() * 3)];
+  let result = "";
+  console.log(computerChoice);
+  if (playerChoice === computerChoice) {
+    result = "It's a tie";
+  } else {
+    switch (playerChoice) {
+      case "rock":
+        result = computerChoice === "scissors" ? "You win" : "You lose";
+        break;
+
+      case "paper":
+        result = computerChoice === "rock" ? "You win" : "You lose";
+        break;
+
+      case "scissors":
+        result = computerChoice === "paper" ? "You win" : "You lose";
+        break;
     }
+  }
+
+  playerDisplay.textContent = `PLAYER: ${playerChoice}`;
+  computerDisplay.textContent = `Computer: ${computerChoice}`;
+  resultDisplay.textContent = result;
+
+  resultDisplay.classList.remove("greenText", "redText");
+
+  switch (result){
+    case 'You win':
+          resultDisplay.classList.add("greenText");
+          break;
+    case 'You lose':
+          resultDisplay.classList.add("redText");
+          break;
+    }
+
+  updateScores(result); // Update scores after each round
+
+  roundsPlayed++;
+
+  if (roundsPlayed === totalRounds) {
+    displayFinalScores(); 
+  }
 }
 
-function playRound (playerSelection, computerSelection) {
-
-    playerSelection = playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1);
-
-//if selections are invalid returns error message to player//
-    if (playerSelection != 'Rock' && playerSelection != 'Scissors' && playerSelection != 'Paper') {
-        return 'Error: please select Rock,Paper,or Scissors';
-    }
-    if (playerSelection == computerSelection) {
-        return 'its a tie'     
-    }
-    //determines if player wins//
-    if (
-        (playerSelection === 'Rock' && computerSelection === 'Scissors') || 
-        (playerSelection === 'Paper' && computerSelection === 'Rock') ||
-        (playerSelection === 'Scissors' && computerSelection === 'Paper')
-         ) {
-             playerScore++
-             roundWinner = 'player'
-             return 'you won this round'
-         }
-         //determines if computer wins//
-    if (
-            (computerSelection === 'Rock' && playerSelection === 'Scissors') || 
-            (computerSelection === 'Paper' && playerSelection === 'Rock') ||
-            (computerSelection === 'Scissors' && playerSelection === 'Paper')
-             ) {
-                 computerScore++
-                 roundWinner = 'computer'
-                return 'big oof you lost this one'
-             }
-}
-function playGame(){
-    let playerSelection = prompt("Pick your Tool (Rock,Paper,Scissors)"); //gets player selection//
-    let computerSelection = getComputerChoice();
-    console.log(playerSelection, computerSelection);
-    console.log(playRound(playerSelection, computerSelection));
-}
-    
-for (let i = 0; i < 5; i++) {
-    playGame();
+function updateScores(result) {
+  if (result === "You win") {
+    playerScore++;
+  } else if (result === "You lose") {
+    computerScore++;
+  }
 }
 
-function displayWinner () {
-    if (playerScore > computerScore) {
-            return 'You are the champion'}
-    else if (playerScore<computerScore) {
-            return 'better luck in the next game'}
-    else if (playerScore == computerScore) {
-             return 'how tf you tie in a 5 round game'}
-    }
-    console.log(displayWinner())
 
+
+function displayFinalScores() {
+  // Display final scores or game over message
+
+  resultDisplay.textContent = `Final Scores:
+    Player: ${playerScore}
+    Computer: ${computerScore}`;
+ 
+      }
