@@ -38,8 +38,8 @@ h1 {
 }
 
 button {
-  height: 40px;
-  width: 110px;
+  height: 50px;
+  width: 90px;
   margin: 10px;
 }
 
@@ -49,4 +49,25 @@ button {
 
 .redText {
   color: red;
+}
+
+img {
+  height: 50px;
+  width: auto;
+}
+
+@media (max-width: 768px) {
+  h1, #playerDisplay, #computerDisplay, #resultsDisplay {
+    font-size: 2rem; /* Smaller font size */
+  }
+
+  button {
+    height: 60px; /* Larger buttons for easier interaction */
+    width: 100%; /* Full width for better use of space */
+    margin: 5px 0; /* Adjust margin for stacked layout */
+  }
+
+  #choices {
+    flex-direction: column; /* Stack buttons vertically */
+  }
 }
